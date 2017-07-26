@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)https://notes.acadview.com/?program=frontend&class=js-7&s=o1qqvtl9n5nsotsqohkfgk4ki&b=78#/20 -->
+<html class=" js no-mobile desktop no-ie chrome chrome59 root-section w-1152 gt-240 gt-320 gt-480 gt-640 gt-768 gt-800 gt-1024 lt-1280 lt-1440 lt-1680 lt-1920 no-portrait landscape gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch no-retina fontface domloaded" id="index-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Notes | AcadView</title>
+  <!-- Takes care of dynamically loading the template -->
+  <!--<script src="js/csi.min.js"></script>-->
+
+  <link rel="stylesheet" href="./reveal.css">
+  <link rel="stylesheet" href="./acadview.css">
+  <link rel="stylesheet" href="./black.css">
+
+  <!--Custom css-->
+  <link rel="stylesheet" href="./custom.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="./zenburn.css"><script type="text/javascript" src="./external.js"></script><script type="text/javascript" src="./notes.js"></script><script type="text/javascript" src="./highlight.js"></script>
+
+
+</head>
+<body>
+
+<div class="reveal slide center ready" role="application" data-transition-speed="default" data-background-transition="fade">
+  <div class="slides" data-external="frontend/js-7.html" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.906514);"><section class="past" style="top: 252.5px; display: none;" hidden="" aria-hidden="true">
+        <h3> Search 'n' Sort </h3>
+        <h4> Songify - Class 7</h4>
+</section>
+
+<section class="past" style="top: 203px; display: none;" hidden="" aria-hidden="true">
+    <h1> Agenda </h1>
+    <div> 1. Displaying the current song </div>
+    <div> 2. Adding search and sort to our playlist </div>
+</section>
+
+<section class="past" style="top: 30px; display: none;" hidden="" aria-hidden="true">
+	<img src="./class-6.png" style="height:400px;width: auto;">
+	<p> There is an issue with our app. Right now there's place where the current song's details are shown </p>
+</section>
+
+<section class="past" style="top: 109.5px; display: none;" hidden="" aria-hidden="true">
+	<p> Let's show the current song in our app! </p>
+	<div class="fragment visible" data-fragment-index="0"> <p>Copy and Paste this HTML code just before the end of the section with class 'content</p>
+	<pre><code class="hljs dust"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-wrapper"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"img/song1.jpg"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-image"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-name"</span>&gt;</span>Tamma Tamma Again<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-album"</span>&gt;</span>Badrinath ki Dulhania<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+       	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre></div>
+</section>
+
+<section class="past" style="top: 41px; display: none;" hidden="" aria-hidden="true">
+	<p> And copy and paste the follwing CSS at the end of your main.css file </p>
+	<pre><code class="hljs css">
+<span class="hljs-selector-class">.content</span> {
+    <span class="hljs-attribute">position</span>: relative;
+}
+<span class="hljs-selector-class">.current-song-wrapper</span> {
+    <span class="hljs-attribute">position</span>: absolute;
+    <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">display</span>: flex;
+}
+
+<span class="hljs-selector-class">.current-song-image</span> {
+    <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+    <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">1rem</span>;
+}
+
+<span class="hljs-selector-class">.current-song-name</span> {
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">1.4rem</span>;
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">4px</span>;
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.current-song-album</span> {
+    <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">0.4rem</span>;
+}</code></pre>
+</section>
+
+<section class="past" style="top: 3px; display: none;" hidden="" aria-hidden="true">
+	<img src="./album-1.png" style="height: 400px;width: auto;">
+	<p> This is how it should look. If you're curious, you can look at the CSS after class and understand how we made this element come at the bottom </p>
+</section>
+
+<section class="past" style="top: 3px; display: none;" hidden="" aria-hidden="true">
+	<p> P.S. You'll also have to create an 'img' folder inside your project and put the album covers of different songs there </p>
+	<img src="./album-2.png" style="height: 400px;width: auto;">
+</section>
+
+<section class="past" style="top: 155px; display: none;" hidden="" aria-hidden="true">
+	<p> There's one issue right now </p>
+	<p class="fragment visible" data-fragment-index="0">Whenever we change the song, the current song details do not change</p>
+	<p class="fragment visible" data-fragment-index="1">To "dynamically" change the song details, we'll use Javascript!</p>
+</section>
+
+<section class="past" style="top: 64px; display: none;" hidden="" aria-hidden="true">
+	<p> Let's think how we'd do this </p>
+	<p class="fragment visible" data-fragment-index="0">1. We'd figure out when we want to change the current song details</p>
+	<p class="fragment visible" data-fragment-index="1">We only want to do that when the song is changed. Not when we pause the song.</p>
+	<p class="fragment visible" data-fragment-index="2">Look at the addSongNameClickEvent() function. The else statement at the end only executes when we are changing the song, let's put our code there</p>
+</section>
+
+<section class="past" style="top: 146.5px; display: none;" hidden="" aria-hidden="true"><p>For now, let's remove the song details we fixed in the HTML</p>
+<pre><code class="hljs dust"><span class="xml"> <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-wrapper"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-image"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"current-song-album"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></code></pre>
+        </section>
+
+<section class="past" style="top: 99.5px; display: none;" hidden="" aria-hidden="true">
+	<p> 2. We'll need a function that we can call here </p>
+	<p class="fragment visible" data-fragment-index="0">Let's give it a proper name: changeCurrentSongDetails()</p>
+	<p class="fragment visible" data-fragment-index="1">Let's also assume that somehow, we are passing in the whole song object to it as a parameter</p>
+	<div class="fragment visible" data-fragment-index="2"><pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">changeCurrentNameDetails</span><span class="hljs-params">(songObj)</span> </span>{
+    <span class="hljs-comment">// Code goes here</span>
+}</code></pre></div>
+</section>
+
+<section class="past" style="top: 72.5px; display: none;" hidden="" aria-hidden="true">
+	<p>3. Whenever the function is called, we want it to update the song</p>
+	<div class="fragment visible" data-fragment-index="0"><pre><code class="hljs mel">function changeCurrentSongDetails(songObj) {
+    $(<span class="hljs-string">'.current-song-image'</span>).attr(<span class="hljs-string">'src'</span>,<span class="hljs-string">'img/'</span> + songObj.<span class="hljs-keyword">image</span>)
+    $(<span class="hljs-string">'.current-song-name'</span>).<span class="hljs-keyword">text</span>(songObj.name)
+    $(<span class="hljs-string">'.current-song-album'</span>).<span class="hljs-keyword">text</span>(songObj.album)
+}</code></pre></div>
+<p class="fragment visible" data-fragment-index="1">Revision: songObj.name means accessing the 'name' property of the object we got </p>
+<p class="fragment visible" data-fragment-index="2">But what does the first line mean?</p>
+</section>
+
+<section class="past" style="top: 35.5px; display: none;" hidden="" aria-hidden="true">
+	<pre><code class="hljs mel">$(<span class="hljs-string">'.current-song-image'</span>).attr(<span class="hljs-string">'src'</span>,<span class="hljs-string">'img/'</span> + songObj.<span class="hljs-keyword">image</span>)</code></pre>
+	<p>1. This means we are using jQuery to select the element with class 'current-song-image'</p>
+	<p class="fragment visible" data-fragment-index="0">Then we are setting it's src attribute to something (.attr('src',...)</p>
+	<p class="fragment visible" data-fragment-index="1">The src is made of two strings added together: folder name + fileName</p>
+	<p class="fragment visible" data-fragment-index="2">This src attribute has a value of img/song1.jpg or whatever songObj.image's value is</p>
+</section>
+
+<section class="past" style="top: 219px; display: none;" hidden="" aria-hidden="true">
+	<p>Par humne toh songs Object mein image ki koi property hi nahi daali!</p>
+	<p class="fragment visible" data-fragment-index="0">Chalo phir daal dete hai!</p>
+</section>
+
+<section class="past" style="top: 0px; display: none;" hidden="" aria-hidden="true">
+	<img src="./album-3.png" style="height: 550px;width: auto;">
+	<p> Adding the 'image' property in our song objects
+</p></section>
+<section class="past" style="top: 58.5px; display: none;" hidden="" aria-hidden="true">
+	<h3>Remember</h3>
+	<p>A common source of error is putting the song URL of the image</p>
+	<p class="fragment visible" data-fragment-index="0">Here we are just putting the name of the file with the CORRECT extension</p>
+	<p class="fragment visible" data-fragment-index="1">And adding the folder name inside the function only</p>
+	<p class="fragment visible" data-fragment-index="2">Don't put in absolute URLs like D:/Sarthak/Acadview... This won't work on Github</p>
+</section>
+
+<section class="past" style="top: 0px; display: none;" hidden="" aria-hidden="true">
+	<p>4. Let's actually call our function now</p>
+	<div class="fragment visible" data-fragment-index="0"><p>Change your function like this</p>
+	<pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addSongNameClickEvent</span><span class="hljs-params">(songObj,position)</span> </span>{
+    <span class="hljs-keyword">var</span> songName = songObj.fileName; <span class="hljs-comment">// New Variable </span>
+    ...
+        <span class="hljs-keyword">else</span> {
+            audio.src = songName;
+            toggleSong();
+            changeCurrentSongDetails(songObj); <span class="hljs-comment">// Function Call</span>
+       }
+    });
+}</code></pre></div>
+<p class="fragment visible" data-fragment-index="1">Compare the old and the new version </p>
+<p class="fragment visible" data-fragment-index="2">Now we are passing it the whole songObj instead of just the fileName</p>
+</section>
+
+<section class="past" style="top: 0px; display: none;" hidden="" aria-hidden="true">
+	<p>5. Find a way to get the song Object</p>
+	<p class="fragment visible" data-fragment-index="0">Initially, we assumed that the changeCurrentSongDetails() functions gets the song Object SOMEHOW</p>
+	<p class="fragment visible" data-fragment-index="1">When we went to the function that calls changeCurrentSongDetails() and assumed that this function also gets the song Object as a parameter SOMEHOW</p>
+	<p class="fragment visible" data-fragment-index="2">Now, we'll again go to the function that called addSongNameClickEvent() and find a way to pass the song Object to it</p>
+</section>
+
+<section class="past" style="top: 44px; display: block;" hidden="" aria-hidden="true">
+	<pre><code class="hljs lisp">for(<span class="hljs-name">var</span> i =0<span class="hljs-comment">; i &lt; songs.length;i++) {</span>
+        var obj = songs[i]<span class="hljs-comment">;</span>
+        var name = '#song' + (<span class="hljs-name">i+1</span>)<span class="hljs-comment">;</span>
+        var song = $(<span class="hljs-name">name</span>)<span class="hljs-comment">;</span>
+        ...
+        addSongNameClickEvent(<span class="hljs-name">obj</span>.fileName,i+1)
+    }</code></pre>
+    <p class="fragment visible" data-fragment-index="0">Right now we are just passing the fileName to the addSongNameClickEvent</p>
+    <div class="fragment visible" data-fragment-index="1"><p>To pass the whole object, we'll just write: </p>
+    <pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">addSongNameClickEvent</span><span class="hljs-params">(obj,i+<span class="hljs-number">1</span>)</span></span></code></pre>
+    </div>
+    <p class="fragment visible" data-fragment-index="2">Let's see if our code works now</p>
+</section>
+
+<section class="past" style="top: 57px; display: block;" hidden="" aria-hidden="true">
+	<img src="./album-4.png" style="height: 400px;width: auto;">
+	<p>It works! There's just one minor issue</p>
+</section>
+<section class="present" style="top: 30px; display: block;">
+	<img src="./album-5.png" style="height: 400px;width: auto;">
+	<p>When the app first loads, the screen looks a bit weird. Let's add an initial image to our app!</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 59px; display: block;">
+	<p>Add the following line of code just inside window.onload</p>
+	<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+
+    changeCurrentSongDetails(songs[<span class="hljs-number">0</span>]);
+    ...</code></pre>
+    <p class="fragment" data-fragment-index="0">Just like our play icon by default plays the first song, similarly we are showing the song details of the first song by default. </p>
+    <p class="fragment" data-fragment-index="1">songs[0] gives us the song object for the first song!</p>
+</section>
+<section hidden="" aria-hidden="true" class="future" style="top: 149.5px; display: block;">
+    <h3> Task </h3>
+    <p> Write down what we learned in comments </p>
+    <p> You can use Hinglish to explain the ideas </p>
+    <p class="fragment" data-fragment-index="0"> Tum jab yeh code 2 din baad padhoge, toh tumko samajh mein aana chahiye - vaise likho comments </p>
+</section>
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <h1> Agenda </h1>
+    <div style="text-decoration: line-through;"> 1. Displaying the current song </div>
+    <div> 2. Adding search and sort to our playlist </div>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<p>To add search and sort functionality in our playist, we'll use a jquery plugin</p>
+	<p class="fragment" data-fragment-index="0">Plugins are small packages of code that do one thing and one thing alone</p>
+	<p class="fragment" data-fragment-index="1">ex: We download Adblock Plus plugin/extension in our browser to block ads</p>
+	<p class="fragment" data-fragment-index="2">Btw, a library is much bigger than a plugin and does lots of things</p>
+	<p class="fragment" data-fragment-index="3">A jquery plugin means, the plugin is dependant on jquery. Without jquery the plugin won't work</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<p>Plugins help us build things faster - using code someone wrote earlier</p>
+	<p class="fragment" data-fragment-index="0">Let's use one such plugin to add search and sort features to our playlist</p>
+	<h3 class="fragment" data-fragment-index="1">Introducing DataTables</h3>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<p><a href="https://datatables.net/">DataTables</a> is a popular jQuery plugin that is used to work with tables</p>
+	<p class="fragment" data-fragment-index="0">Let's first see how to include this plugin in our app</p>
+	<p class="fragment" data-fragment-index="1">P.S. We'll need to add both the CSS and JS file that DataTables provides</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+		<img src="./dt-2.png" style="height: 400px;width: auto;">
+		<p>An example of dataTables in action</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<img src="./dt-1.png" style="height: 400px;width: auto;">
+	<p class="fragment" data-fragment-index="0">What's a CDN?</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<h3>Content Delivery Network (CDN)</h3>
+	<p>Simply said, a CDN helps us get the files we need for our webpage faster</p>
+	<p class="fragment" data-fragment-index="0">When you request a file from a CDN, it finds the closest server that has a copy of the file and gives it to you</p>
+	<p class="fragment" data-fragment-index="1">Why is this useful? Mumbai se Delhi aane mein kam samay lagtaa hai. USA se Delhi aane mein toh bahut zyada lagta hai</p>
+	<p class="fragment" data-fragment-index="2">Jitna kam samay lagega samaan (fonts/imgs/css) aane mein for the website, the faster the website will look and feel</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<div><p>Add a CSS file for DataTables like this: </p>
+	<pre><code class="hljs lasso">&lt;<span class="hljs-keyword">link</span> rel=<span class="hljs-string">"stylesheet"</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"text/css"</span> href=<span class="hljs-string">"font-awesome.css"</span>&gt;
+    &lt;<span class="hljs-keyword">link</span> rel=<span class="hljs-string">"stylesheet"</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"text/css"</span> href=<span class="hljs-string">"https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"</span>&gt;
+    &lt;<span class="hljs-keyword">link</span> rel=<span class="hljs-string">"stylesheet"</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">"text/css"</span> href=<span class="hljs-string">"main.css"</span>&gt;</code></pre></div>
+    <div class="fragment" data-fragment-index="0"><p>And a JS file like this: </p>
+    <pre><code class="hljs dust"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"jquery.js"</span>&gt;</span><span class="undefined">
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"</span>&gt;</span><span class="undefined">
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"main.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span></code></pre></div>
+    <p class="fragment" data-fragment-index="1">This way, we don't have to download the files of all the plugings we'll use. Just put the link and let the browser do everything else</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<img src="./dt-3.png" style="height: 200px;width: auto;">
+	<p>To use DataTables, we have to initalize it. Like we used to initialize git. DataTables ka bhi greh pravesh karwana padta hai</p>
+	<div class="fragment" data-fragment-index="0"><p>This is how we do it. Copy and paste the following lines at the end of the window.onload function</p>
+	<pre><code class="hljs gcode">$<span class="hljs-comment">('#songs')</span>.DataTable<span class="hljs-comment">()</span>;</code></pre></div>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;"><p>Now, put all the song-list and song-header code inside a new div with 'id' of songs. Like this</p>
+<pre><code class="hljs applescript"> &lt;audio src=<span class="hljs-string">"song1.mp3"</span>&gt;&lt;/audio&gt;
+                &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">id</span>=<span class="hljs-string">"songs"</span>&gt;
+                     &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"list-headers"</span>&gt;
+                       ...
+                    &lt;/<span class="hljs-keyword">div</span>&gt;
+                    &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"song-list"</span>&gt;
+                        ...
+                     &lt;/<span class="hljs-keyword">div</span>&gt;
+                        ....
+                &lt;/<span class="hljs-keyword">div</span>&gt;</code></pre>
+                <p class="fragment" data-fragment-index="0">Now refresh your browser and see what happens</p></section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+	<p> By the way, $(document).ready is the jQuery equivalent of window.onload </p>
+	<pre><code class="hljs javascript">$(<span class="hljs-built_in">document</span>).ready(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-comment">// Do Something</span>
+});</code></pre>
+	<p class="fragment" data-fragment-index="0">You can use this as well instead of window.onload</p>
+	<p class="fragment" data-fragment-index="1">The benefit of using $(document).ready is that you can have many of these in your JS file, but only one of window.onload</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <img src="./dt-4.png" style="max-height: 400px;width: auto;">
+    <p> What this error means is that we need to use a different html tag instead of &lt;div&gt; tag</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <p>Also, you'd notice that the rest of our javascript wouldn't run till the time the alert box is opened</p>
+    <p class="fragment" data-fragment-index="0">This is why we don't use alert('') functions in our web apps</p>
+    <p class="fragment" data-fragment-index="1">We use console.log('') to test something. It doesn't block the rest of the JS code from executing</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <h3> Introducing Tables </h3>
+    <p class="fragment" data-fragment-index="0">Table means a grid of rows and columns</p>
+    <p class="fragment" data-fragment-index="1">There are four tags we'll use:</p>
+    <p class="fragment" data-fragment-index="2">1. &lt;table&gt; - Wrapping Element</p>
+    <p class="fragment" data-fragment-index="3">2. &lt;tr&gt; - Table Row. We'll make our table row by row</p>
+    <p class="fragment" data-fragment-index="4">3. &lt;td&gt; - For one table cell/element</p>
+    <p class="fragment" data-fragment-index="5">4. &lt;thead&gt; - For table heading </p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <h3>Task</h3>
+    <p>Replace your code in the songs div to use table tags</p>
+    <div class="fragment" data-fragment-index="0">
+        <pre><code class="hljs dust"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"songs"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">thead</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-headers"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span> Title <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span> Artist <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span> Album <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span> Duration <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- &lt;div class="song-list"&gt; --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"song1"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-artist"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-album"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-length"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"song2"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-artist"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-album"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-length"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"song3"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-artist"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-album"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-length"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"song4"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-name"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-artist"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-album"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"song-length"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- &lt;/div&gt; --&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+        </span></code></pre>
+        <p>Also comment out 'song-list' class div</p>
+    </div>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <img src="./dt-5.png" style="max-height: 400px;width: auto;">
+    <p> YEH KYA HUA? </p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <p> Don't worry. DataTables adds some CSS on its own. This looks good on white backgrounds. But since we have a dark background, we just need to override some of these properties. </p>
+    <div class="fragment" data-fragment-index="0">
+        <p>Add the following code in your CSS files</p>
+        <pre><code class="hljs css">
+            <span class="hljs-comment">/*DataTables overrides*/</span>
+<span class="hljs-selector-tag">table</span><span class="hljs-selector-class">.dataTable</span> <span class="hljs-selector-tag">tbody</span> <span class="hljs-selector-tag">tr</span> {
+    <span class="hljs-attribute">background-color</span>: initial;
+}
+<span class="hljs-selector-id">#songs_info</span> {
+    <span class="hljs-attribute">display</span>: none;
+}
+
+<span class="hljs-selector-id">#songs_filter</span> {
+    <span class="hljs-attribute">color</span>: transparent;
+}
+<span class="hljs-selector-id">#songs_filter</span> <span class="hljs-selector-tag">input</span> {
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">400px</span>;
+    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">1rem</span>;
+    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+}
+        </code></pre>
+    </div>
+</section>
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <p> One Last Thing. Let's turn off the page count. This doesn't look nice </p>
+    <div class="fragment" data-fragment-index="0">
+        <p>Make the following changes to your JS dataTables function call</p>
+        <pre><code class="hljs smalltalk"><span class="hljs-string">$(</span><span class="hljs-string">'#songs'</span>).<span class="hljs-type">DataTable</span>({
+        paging: <span class="hljs-keyword">false</span>
+    });</code></pre>
+    </div>
+    <p class="fragment" data-fragment-index="1">Can any guess what we are passing inside the DataTable() function?</p>
+    <p class="fragment" data-fragment-index="2">We're passing an object! (Notice the curly braces)</p>
+</section>
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <h3>Power of Plugins</h3>
+    <p>Now we can sort any song by paramter just by clicking on its heading</p>
+    <p class="fragment" data-fragment-index="0">Isn't this cool?</p>
+    <p class="fragment" data-fragment-index="1">We can also search from our playlist</p>
+    <p class="fragment" data-fragment-index="2">Let's try it out!</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <p>OH NO!</p>
+    <p class="fragment" data-fragment-index="0">We now have a bug in our program</p>
+    <p class="fragment" data-fragment-index="1">Whenever we press spacebar in our input tag, it toggles the song</p>
+    <p class="fragment" data-fragment-index="2">How can we solve this?</p>
+    <p class="fragment" data-fragment-index="3">Achhe se socho, we'll cover this in the next class!</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <h1> Agenda </h1>
+    <div style="text-decoration: line-through;"> 1. Displaying the current song </div>
+    <div style="text-decoration: line-through;"> 2. Adding search and sort to our playlist </div>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <div> Achievements Unlocked </div>
+    <p class="fragment" data-fragment-index="0">1. Showing current song</p>
+    <p class="fragment" data-fragment-index="1">2. Changing img source: $('img').attr('src',...)</p>
+    <p class="fragment" data-fragment-index="2">3. Using a jQuery Plugin</p>
+</section>
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <div> Achievements Unlocked </div>
+    <p class="fragment" data-fragment-index="0">4. jQuery DataTables</p>
+    <p class="fragment" data-fragment-index="1">5. CDN</p>
+    <p class="fragment" data-fragment-index="2">6. $(document).ready(function(){...});</p>
+</section>
+
+<section hidden="" aria-hidden="true" class="future" style="top: 350px; display: none;">
+    <div> Achievements Unlocked </div>
+    <p class="fragment" data-fragment-index="0">7. &lt;table&gt;</p>
+    <p class="fragment" data-fragment-index="1">8. &lt;tr&gt;</p>
+    <p class="fragment" data-fragment-index="2">9. &lt;td&gt;</p>
+    <p class="fragment" data-fragment-index="3">10. &lt;thead&gt;</p>
+</section></div>
+<div class="backgrounds"><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" data-loaded="true" style="display: none;"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 500.87px;"></span></div><aside class="controls" style="display: block;"><button class="navigate-left enabled" aria-label="previous slide"></button><button class="navigate-right enabled" aria-label="next slide"></button><button class="navigate-up" aria-label="above slide" disabled="disabled"></button><button class="navigate-down" aria-label="below slide" disabled="disabled"></button></aside><div class="slide-number" style="display: block;"><span class="slide-number-a">21</span><span class="slide-number-delimiter">/</span><span class="slide-number-b">47</span></div><div class="speaker-notes" data-prevent-swipe="" tabindex="0"></div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+	
+	When the app first loads, the screen looks a bit weird. Let's add an initial image to our app!
+</div></div>
+
+
+<script src="./head.min.js"></script>
+<script src="./reveal.js"></script>
+
+
+<script>
+  var slidePath = getParameterByName('program') + "/" + getParameterByName('class') + ".html";
+  document.getElementsByClassName("slides")[0].setAttribute("data-external", slidePath);
+
+  // Timeout because DOM needs to be already loaded before Reveal initializatin
+  // Otherwise slides will not show up
+
+  Reveal.initialize({
+    history: true,
+    slideNumber: 'c/t',
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      {src: 'plugin/notes/notes.js', async: true},
+      {
+        src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+        hljs.initHighlightingOnLoad();
+      }
+      },
+      {
+        src: 'plugin/external/external.js', condition: function () {
+        return !!document.querySelector('[data-external]');
+      }
+      },
+    ]
+  });
+
+
+  (function () {
+    var prevSlideTime = 0;
+    var slideVisited = [];
+    var sessionId = getParameterByName('s');
+    var payload = {
+      notes_url: window.location.href,
+      batch_id: parseInt(getParameterByName('b'), 10),
+      slides_data: []
+    };
+
+  Reveal.addEventListener('slidechanged', function (event) {
+    slideVisited.push({
+      time_spent_in_msecs: Math.round(event.timeStamp - prevSlideTime),
+      slide_number: event.indexh + 1
+    });
+    prevSlideTime = event.timeStamp;
+  });
+
+    function poll() {
+      if (slideVisited.length) {
+        payload.slides_data = Object.assign([], slideVisited);
+        slideVisited = [];
+
+        try {
+          var xhr = new XMLHttpRequest();
+          xhr.withCredentials = true;
+
+          xhr.open("POST", "https://" + window.location.hostname + "/py/notes/track", true);
+          xhr.setRequestHeader("content-type", "application/json");
+          xhr.setRequestHeader("cache-control", "no-cache");
+          xhr.setRequestHeader("sessionId", sessionId);
+
+          xhr.send(JSON.stringify(payload));
+        } catch(error) {
+          console.log(error);
+        }
+      }
+      setTimeout(arguments.callee, 10000);
+    }
+
+    poll();
+
+  })();
+
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+</script>
+
+
+</body></html>

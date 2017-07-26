@@ -1,0 +1,74 @@
+img {
+  width: 50%;
+  height: 50%;
+}
+.red-italic {
+  color:red;
+  text-decoration: underline;
+  font-style: italic !important;
+}
+.small-font{
+  font-size: 20px !important;
+}
+
+.medium-font {
+  font-size: 28px !important;
+}
+
+.small-image {
+  width: 40% !important;
+  height: auto !important;
+}
+
+.smaller-image {
+  width: 30% !important;
+  height: auto !important;
+}
+
+
+.margin-top {
+    margin-top: 5% !important;
+}
+
+.space-ul li{
+  padding-top: 5% !important;
+}
+
+.small-space-ul li {
+    padding-top: 1% !important;
+}
+
+.blue-font {
+  color: #00B2EE ;
+}
+
+.green-font {
+  color: greenyellow;
+}
+
+.red-font {
+  color: coral;
+}
+
+.gold-font {
+  color: gold ;
+}
+.attention-box {
+  border: 15px solid red !important;
+  padding: 5% !important;
+}
+
+.cyan-box {
+  border: 5px solid cyan !important;
+  padding: 5% !important;
+}
+
+.special-box {
+  background-color: green;
+  padding: 5% !important;
+
+}
+
+.done-text {
+  text-decoration: line-through; 
+}
